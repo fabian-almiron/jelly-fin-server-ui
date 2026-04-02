@@ -1,0 +1,70 @@
+// Default MUI breakpoints
+// https://mui.com/material-ui/customization/breakpoints/#default-breakpoints
+$mui-bp-sm: 600px;
+$mui-bp-md: 900px;
+$mui-bp-lg: 1200px;
+$mui-bp-xl: 1536px;
+
+#reactRoot {
+    height: 100%;
+}
+
+// Hide some items from the user "settings" page that are in the drawer
+#myPreferencesMenuPage {
+    .lnkQuickConnectPreferences,
+    .adminSection,
+    .userSection {
+        display: none !important;
+    }
+}
+
+// Shorter AppBar / Toolbar (matches components/toolbar/AppToolbar compact sizing)
+.MuiAppBar-root .MuiToolbar-root {
+    min-height: 44px !important;
+}
+
+// Legacy skinHeader: less vertical padding + compact Home / Favorites tabs
+.skinHeader .headerTop {
+    padding-top: 0.28em !important;
+    padding-bottom: 0.28em !important;
+}
+
+.withSectionTabs .skinHeader .headerTop {
+    padding-bottom: 0.22em !important;
+}
+
+@media all and (min-width: 100em) {
+    .skinHeader .headerTop {
+        padding: 0 20px !important;
+    }
+
+    // Tabs pulled up to sit in one row with the bar — slightly less than stock -4.3em after compacting
+    .headerTabs {
+        margin-top: -3.75em !important;
+    }
+}
+
+// Fix the padding of some pages (below fixed app bar — keep in sync with Toolbar min-height + safe area)
+.homePage.libraryPage.withTabs, // Home page
+// Library pages excluding the item details page and tabbed pages
+.libraryPage:not(
+    .itemDetailPage
+) {
+    padding-top: 2.75rem !important;
+}
+
+.layout-mobile {
+    .itemBackdrop {
+        // Fix backdrop position on mobile item details page
+        margin-top: 0 !important;
+
+        // Add a subtle gradient over the backdrop to ensure the app bar buttons are visible
+        &::before {
+            display: block;
+            content: "";
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(180deg, rgba(32, 32, 32, 0.6) 0%, rgba(32, 32, 32, 0.2) 4rem, rgba(0, 0, 0, 0) 50%);
+        }
+    }
+}

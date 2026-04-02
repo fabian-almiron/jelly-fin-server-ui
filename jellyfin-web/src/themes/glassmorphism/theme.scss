@@ -1,0 +1,305 @@
+// iOS-style Glassmorphism Theme for Jellyfin
+// Frosted glass surfaces, deep-space background, iOS system blue accent
+
+@use '../_base/theme';
+
+// ==============================
+// Override CSS custom properties
+// ==============================
+:root {
+    --jf-palette-AppBar-transparentBg: rgba(7, 10, 21, 0.35);
+}
+
+// ==============================
+// Deep-space gradient background
+// ==============================
+html,
+.backgroundContainer,
+.nowPlayingPlaylist,
+.nowPlayingContextMenu {
+    background:
+        radial-gradient(ellipse at 10% 8%, rgba(94, 58, 255, 0.18) 0%, transparent 45%),
+        radial-gradient(ellipse at 88% 90%, rgba(10, 100, 255, 0.14) 0%, transparent 45%),
+        #070a15 !important;
+}
+
+.backgroundContainer.withBackdrop {
+    opacity: 0.82;
+}
+
+// ==============================
+// Scrollbar — iOS minimal style
+// ==============================
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    box-shadow: none;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:horizontal,
+::-webkit-scrollbar-thumb:vertical {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+// ==============================
+// Header — Frosted Glass
+// ==============================
+.skinHeader {
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+
+.skinHeader-withBackground {
+    background-color: rgba(7, 10, 21, 0.75) !important;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+
+// Override the base theme's forced `backdrop-filter: none !important`
+.skinHeader.semiTransparent {
+    background-color: rgba(7, 10, 21, 0.35) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+}
+
+// ==============================
+// Sidebar / Drawer — Frosted Glass
+// ==============================
+.mainDrawer,
+.drawer-open {
+    background-color: rgba(7, 10, 21, 0.82) !important;
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 4px 0 32px rgba(0, 0, 0, 0.5);
+}
+
+// ==============================
+// Card default color variants
+// ==============================
+.defaultCardBackground1 {
+    background: linear-gradient(135deg, rgba(94, 58, 255, 0.55), rgba(60, 30, 140, 0.5));
+}
+
+.defaultCardBackground2 {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.5), rgba(0, 80, 200, 0.5));
+}
+
+.defaultCardBackground3 {
+    background: linear-gradient(135deg, rgba(48, 209, 88, 0.45), rgba(20, 140, 60, 0.45));
+}
+
+.defaultCardBackground4 {
+    background: linear-gradient(135deg, rgba(255, 159, 10, 0.45), rgba(200, 120, 0, 0.45));
+}
+
+.defaultCardBackground5 {
+    background: linear-gradient(135deg, rgba(255, 69, 58, 0.5), rgba(180, 30, 20, 0.5));
+}
+
+// ==============================
+// Cards — Glass surface
+// ==============================
+.visualCardBox {
+    background: rgba(255, 255, 255, 0.07) !important;
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 16px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+}
+
+// ==============================
+// Dialogs / Modals — Glass
+// ==============================
+.dialog {
+    background-color: rgba(8, 12, 28, 0.9) !important;
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-radius: 20px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.75);
+}
+
+.formDialogHeader:not(.formDialogHeader-clear),
+.formDialogFooter:not(.formDialogFooter-clear) {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+// ==============================
+// Panel surfaces
+// ==============================
+.collapseContent,
+.paperList {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
+
+// ==============================
+// App footer
+// ==============================
+.appfooter,
+.playlistSectionButton {
+    background: rgba(7, 10, 21, 0.82) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+// ==============================
+// Detail ribbon
+// ==============================
+.detailRibbon {
+    background: rgba(7, 10, 21, 0.8) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    .layout-tv & {
+        background: none;
+    }
+}
+
+// ==============================
+// Nav menu items
+// ==============================
+.navMenuOption-selected {
+    background: rgba(10, 132, 255, 0.22) !important;
+    border-left: 2px solid #0a84ff !important;
+    border-radius: 0 8px 8px 0;
+    color: #fff !important;
+}
+
+.navMenuOption:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 0 8px 8px 0;
+}
+
+// ==============================
+// Toast / Snackbar
+// ==============================
+.toast {
+    background: rgba(10, 15, 38, 0.92) !important;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+// ==============================
+// Form inputs
+// ==============================
+.emby-input,
+.emby-textarea {
+    background: rgba(255, 255, 255, 0.07) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.emby-select-withcolor {
+    background: rgba(255, 255, 255, 0.07) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px;
+}
+
+// ==============================
+// Card focus state
+// ==============================
+.card:focus .cardBox.visualCardBox,
+.card:focus .cardBox:not(.visualCardBox) .cardScalable {
+    border-color: rgba(10, 132, 255, 0.8) !important;
+    box-shadow:
+        0 0 0 2px rgba(10, 132, 255, 0.35),
+        0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+// ==============================
+// Now-playing bar
+// ==============================
+.nowPlayingBar {
+    background: rgba(7, 10, 21, 0.82) !important;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+// ==============================
+// Action sheet divider
+// ==============================
+.actionsheetDivider {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+// ==============================
+// Buttons — glass style
+// ==============================
+a[data-role=button],
+.raised {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 100em;
+
+    &:focus,
+    &:hover {
+        background: rgba(255, 255, 255, 0.16) !important;
+    }
+}
+
+.fab {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+
+    &:focus,
+    &:hover {
+        background: rgba(255, 255, 255, 0.16) !important;
+    }
+}
+
+// ==============================
+// Emby tab bar
+// ==============================
+.emby-tab-button-active {
+    color: #0a84ff;
+    border-bottom: 2px solid #0a84ff;
+}
+
+// ==============================
+// Progress bar accent
+// ==============================
+.itemProgressBarForeground {
+    background: linear-gradient(90deg, #0a84ff, #5ac8fa) !important;
+}
+
+// ==============================
+// Selection panel
+// ==============================
+.selectionCommandsPanel {
+    background: rgba(10, 132, 255, 0.8) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
