@@ -1,0 +1,39 @@
+name: Build & Deploy Jellyfin Web UI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'jellyfin-web/**'
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: jellyfin-web/package-lock.json
+
+      - name: Install dependencies
+        working-directory: jellyfin-web
+        run: npm ci
+
+      - name: Build production
+        working-directory: jellyfin-web
+        run: npm run build:production
+
+      - name: Deploy to Jellyfin web directory
+        run: |
+          rm -rf /www/dk_project/dk_app/jellyfin/web/*
+          cp -r jellyfin-web/dist/* /www/dk_project/dk_app/jellyfin/web/
+
+      - name: Restart Jellyfin container
+        run: docker restart jellyfin

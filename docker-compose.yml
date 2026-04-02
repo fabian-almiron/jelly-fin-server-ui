@@ -1,0 +1,38 @@
+# Jellyfin with your forked jellyfin-web baked into the image.
+# Build: docker compose build
+# Run:   docker compose up -d
+#
+# Alternative without rebuilding the image: build jellyfin-web locally
+# (`cd jellyfin-web && npm ci && npm run build:production`), put `dist`
+# on the host, and add a bind mount:
+#   - /www/dk_project/dk_app/jellyfin/web:/usr/share/jellyfin/web
+# (Jellyfin in the LinuxServer image uses JELLYFIN_WEB_DIR=/usr/share/jellyfin/web.)
+
+services:
+  jellyfin:
+    build:
+      context: .
+      dockerfile: Dockerfile.jellyfin
+    image: local/jellyfin-custom:latest
+    container_name: jellyfin
+    networks:
+      - baota_net
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=022
+      - TZ=America/Denver
+      # Optional but helpful if you later reverse proxy
+      # - JELLYFIN_PublishedServerUrl=192.168.1.129
+    ports:
+      - "8096:8096"
+      # - "8920:8920" # enable only if you turn on HTTPS inside Jellyfin
+    volumes:
+      - /www/dk_project/dk_app/jellyfin/config:/config
+      - /www/dk_project/dk_app/jellyfin/cache:/cache
+      - "/mnt/movies/Media Server:/data"
+    restart: unless-stopped
+
+networks:
+  baota_net:
+    external: true

@@ -1,0 +1,13 @@
+# syntax=docker/dockerfile:1
+# Build custom jellyfin-web, then reuse LinuxServer Jellyfin (server from apt, web from your fork).
+FROM node:24-bookworm AS webbuilder
+WORKDIR /src
+
+COPY jellyfin-web/package.json jellyfin-web/package-lock.json ./
+RUN npm ci
+
+COPY jellyfin-web/ ./
+RUN npm run build:production
+
+FROM lscr.io/linuxserver/jellyfin:latest
+COPY --from=webbuilder /src/dist /usr/share/jellyfin/web
